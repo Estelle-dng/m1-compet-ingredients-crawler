@@ -69,6 +69,7 @@ class CrawlingCommand extends Command
             ]);
         }
         
+        // BDD
         if ($input->getOption('addbdd')) {
             foreach($arrayReceipeIngredients as $object) {
                 $plate = $object['plateName'];
@@ -81,15 +82,15 @@ class CrawlingCommand extends Command
                     if($ingFinded === null) {
                         $newIng = new Ingredient();
                         $newIng->setName($ing);
+                        $newIng->addPlate($newPlate);
                         $this->em->persist($newIng);
-                        $this->em->flush($newIng);
                         $ingFinded = $newIng;
                     }
                     $newPlate->addIngredient($ingFinded);
+                    $this->em->persist($newPlate);
+                    $this->em->flush();
                 }
                 
-                $this->em->persist($newPlate);
-                $this->em->flush($newPlate);
             }
             
         }
