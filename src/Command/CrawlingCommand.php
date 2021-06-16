@@ -2,6 +2,9 @@
 
 namespace App\Command;
 
+use App\Entity\Ingredient;
+use App\Entity\Plate;
+use Doctrine\ORM\EntityManagerInterface;
 use Facebook\WebDriver\WebDriverBy;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,6 +19,11 @@ class CrawlingCommand extends Command
     protected static $defaultName = 'crawl-ing';
     protected static $defaultDescription = 'Crawl the Romarin Website';
 
+    public function __construct(EntityManagerInterface $em)
+    {
+        parent::__construct();
+        $this->em = $em;
+    }
     protected function configure(): void
     {
         $this
@@ -26,10 +34,6 @@ class CrawlingCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-
-        if ($input->getOption('addbdd')) {
-            // 
-        }
 
         $_client = Client::createChromeClient();
 
@@ -65,7 +69,30 @@ class CrawlingCommand extends Command
             ]);
         }
         
-        //$_client->executeScript("document.querySelector('#form-pagebreak-next_324').click()");
+        if ($input->getOption('addbdd')) {
+            foreach($arrayReceipeIngredients as $object) {
+                $plate = $object['plateName'];
+                $ingArray = $object['ingredients'];
+                $newPlate = new Plate();
+                $newPlate->setName($plate);
+                foreach($ingArray as $ing) {
+                    $ingRepo = $this->em->getRepository(Ingredient::class);
+                    $ingFinded = $ingRepo->findOneBySomeField($ing);
+                    if($ingFinded === null) {
+                        $newIng = new Ingredient();
+                        $newIng->setName($ing);
+                        $this->em->persist($newIng);
+                        $this->em->flush($newIng);
+                        $ingFinded = $newIng;
+                    }
+                    $newPlate->addIngredient($ingFinded);
+                }
+                
+                $this->em->persist($newPlate);
+                $this->em->flush($newPlate);
+            }
+            
+        }
 
         $io->success('OKLM');
 
