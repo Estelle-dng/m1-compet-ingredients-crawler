@@ -64,8 +64,6 @@ class CrawlIngCommand extends Command
                 "ingredients" => $arrayIngredients
             ]);
         }
-        
-        //$_client->executeScript("document.querySelector('#form-pagebreak-next_324').click()");
 
         $io->success('OKLM');
 
