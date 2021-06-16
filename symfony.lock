@@ -14,6 +14,7 @@
             "config/routes/annotations.yaml"
         ]
     },
+<<<<<<< HEAD
     "doctrine/cache": {
         "version": "2.0.3"
     },
@@ -94,6 +95,14 @@
     "laminas/laminas-zendframework-bridge": {
         "version": "1.2.0"
     },
+=======
+    "doctrine/inflector": {
+        "version": "2.0.3"
+    },
+    "doctrine/lexer": {
+        "version": "1.2.1"
+    },
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     "nikic/php-parser": {
         "version": "v4.10.5"
     },
@@ -116,7 +125,11 @@
         "version": "1.1.4"
     },
     "symfony/browser-kit": {
+<<<<<<< HEAD
         "version": "5.4.x-dev"
+=======
+        "version": "v5.3.0"
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     },
     "symfony/cache": {
         "version": "5.4.x-dev"
@@ -145,11 +158,16 @@
     "symfony/deprecation-contracts": {
         "version": "v2.4.0"
     },
+<<<<<<< HEAD
     "symfony/doctrine-bridge": {
         "version": "5.4.x-dev"
     },
     "symfony/dom-crawler": {
         "version": "5.4.x-dev"
+=======
+    "symfony/dom-crawler": {
+        "version": "v5.3.0"
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     },
     "symfony/dotenv": {
         "version": "5.4.x-dev"
@@ -201,7 +219,11 @@
         ]
     },
     "symfony/http-client": {
+<<<<<<< HEAD
         "version": "5.4.x-dev"
+=======
+        "version": "v5.3.0"
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     },
     "symfony/http-client-contracts": {
         "version": "v2.4.0"
@@ -221,9 +243,12 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+<<<<<<< HEAD
     "symfony/orm-pack": {
         "version": "v2.1.0"
     },
+=======
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     "symfony/panther": {
         "version": "1.0",
         "recipe": {
@@ -252,10 +277,14 @@
         "version": "v1.23.0"
     },
     "symfony/process": {
+<<<<<<< HEAD
         "version": "5.4.x-dev"
     },
     "symfony/proxy-manager-bridge": {
         "version": "5.4.x-dev"
+=======
+        "version": "v5.3.0"
+>>>>>>> edd8c03 (Feature crawler : Prepare for BDD)
     },
     "symfony/routing": {
         "version": "5.3",
