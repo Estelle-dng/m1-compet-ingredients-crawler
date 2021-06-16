@@ -1,6 +1,33 @@
 {
+    "dbrekelmans/bdi": {
+        "version": "0.3"
+    },
+    "doctrine/annotations": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "a2759dd6123694c8d901d0ec80006e044c2e6457"
+        },
+        "files": [
+            "config/routes/annotations.yaml"
+        ]
+    },
+    "doctrine/inflector": {
+        "version": "2.0.3"
+    },
+    "doctrine/lexer": {
+        "version": "1.2.1"
+    },
+    "nikic/php-parser": {
+        "version": "v4.10.5"
+    },
     "php": {
         "version": "7.4"
+    },
+    "php-webdriver/webdriver": {
+        "version": "1.11.1"
     },
     "psr/cache": {
         "version": "1.0.1"
@@ -13,6 +40,9 @@
     },
     "psr/log": {
         "version": "1.1.4"
+    },
+    "symfony/browser-kit": {
+        "version": "v5.3.0"
     },
     "symfony/cache": {
         "version": "5.4.x-dev"
@@ -40,6 +70,9 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v2.4.0"
+    },
+    "symfony/dom-crawler": {
+        "version": "v5.3.0"
     },
     "symfony/dotenv": {
         "version": "5.4.x-dev"
@@ -90,6 +123,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.3.0"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.4.0"
     },
@@ -98,6 +134,24 @@
     },
     "symfony/http-kernel": {
         "version": "5.4.x-dev"
+    },
+    "symfony/maker-bundle": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
+        }
+    },
+    "symfony/panther": {
+        "version": "1.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "93d9baa582d0a755cc9ef81bc38a921d5fa16973"
+        }
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.0"
@@ -116,6 +170,9 @@
     },
     "symfony/polyfill-php81": {
         "version": "v1.23.0"
+    },
+    "symfony/process": {
+        "version": "v5.3.0"
     },
     "symfony/routing": {
         "version": "5.3",
