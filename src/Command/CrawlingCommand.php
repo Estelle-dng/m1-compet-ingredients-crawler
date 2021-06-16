@@ -3,60 +3,72 @@
 namespace App\Command;
 
 use Facebook\WebDriver\WebDriverBy;
-use Symfony\Component\Panther\Client;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Panther\Client;
 
-class CrawlingCommand extends Command
+class CrawlIngCommand extends Command
 {
-    protected static $defaultName = 'ingredients-crawler';
-    protected static $defaultDescription = 'ingredients crawler';
+    protected static $defaultName = 'crawl-ing';
+    protected static $defaultDescription = 'Crawl the Romarin Website';
 
     protected function configure(): void
     {
         $this
-            ->addArgument('arg1', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option1', null, InputOption::VALUE_NONE, 'Option description')
+            ->addOption('addbdd', null, InputOption::VALUE_NONE, 'Option description')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-       
-        $client = Client::createChromeClient();
-       
-        // Or, if you care about the open web and prefer to use Firefox
-        //$client = Client::createFirefoxClient();
-        
-        $client->request('GET', 'https://persiletromarin.fr/inscription/'); // Yes, this website is 100% written in JavaScript
-    
-        $client->waitForVisibility('iframe');
-        $myFrame = $client->findElement(WebDriverBy::cssSelector('iframe'));
-        $client->switchTo()->frame($myFrame);
-        
-        // Wait for an element to be present in the DOM (even if hidden)
-        $crawler = $client->waitForVisibility('#form-pagebreak-next_324');
-        $client->executeScript("document.getElementById('form-pagebreak-next_324').click()");
-        $crawler = $client->waitFor("label");
-        //$title = $crawler->filter("label b");
-        $ingredients = $crawler->filter("small .weak");
-        $ingredientsList = "";
-        foreach($ingredients as $ingredient){
-            $ingredientsList .= $ingredient->getText();
+
+        if ($input->getOption('addbdd')) {
+            // 
         }
-        $ingredientsList = explode(',' , $ingredientsList);
-        $output->writeln($ingredientsList);
-        // Alternatively, wait for an element to be visible
-        //$crawler = $client->waitForVisibility('#form-pagebreak-next_324');
-        //$client->clickLink('Get started');
-        $client->takeScreenshot('screen.png'); // Yeah, screenshot!
+
+        $_client = Client::createChromeClient();
+
+        $_client->request('GET', 'https://persiletromarin.fr/inscription/');
+        $_client->takeScreenshot('screen.png');
+        $_crawler = $_client->waitFor('iframe');
+        $myFrame = $_client->findElement(WebDriverBy::cssSelector('iframe'));
+        $_client->switchTo()->frame($myFrame);
+        $_client->waitFor('#form-pagebreak-next_324');
+        $_client->executeScript('document.querySelector("#form-pagebreak-next_324").click()');
+        $_crawler = $_client->waitFor('.form-line');
+        $domIngredients = $_crawler->filter("b");
+        $arrayReceipeIngredients = [];
         
+        foreach($domIngredients as $weak) {
+            
+            $fullText = $weak->getText();
+            if($fullText === "") continue;
+            $noLineBreak = str_replace("\n", "|||", $fullText);
+            $arraySplit = explode('|||', $noLineBreak);
+
+            //Ajustement des nom de Plats / ingrédient
+            $plateName = substr($arraySplit[0],6,trim(strlen($arraySplit[0])));
+            $arrayIngredients = explode(',', $arraySplit[1]);
+
+            foreach($arrayIngredients as $key => $in) {
+                $arrayIngredients[$key] = ucfirst(trim($in));
+            }
+
+            array_push($arrayReceipeIngredients, [
+                "plateName" => $plateName,
+                "ingredients" => $arrayIngredients
+            ]);
+        }
+        
+        //$_client->executeScript("document.querySelector('#form-pagebreak-next_324').click()");
+
+        $io->success('OKLM');
+
         return Command::SUCCESS;
     }
-
 }
