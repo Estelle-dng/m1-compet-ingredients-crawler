@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Panther\Client;
 
-class CrawlIngCommand extends Command
+class CrawlingCommand extends Command
 {
     protected static $defaultName = 'crawl-ing';
     protected static $defaultDescription = 'Crawl the Romarin Website';
