@@ -105,13 +105,7 @@ class CrawlingCommand extends Command
                     $securePlural2 = $ingRepo->findOneBySomeField($ingWithoutS);
                     $ingFinded = $ingFinded === null ? $securePlural2 : $ingFinded;
                     if($ingFinded === null && $securePlural === null && $securePlural2 === null) {
-                        if(in_array($ing, $this->listProt)) {
-                            $type = "Principaux";
-                        } else if(in_array($ing, $this->listLeg)) {
-                            $type = "Légumes";
-                        } else {
-                            $type = "Condiments";
-                        }
+                        $type = in_array($ing, $this->listProt) ? "Principaux" : "Condiments";
                         
                         $newIng = new Ingredient();
                         $newIng->setName($ing);
