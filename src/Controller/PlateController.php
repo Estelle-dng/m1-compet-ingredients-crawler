@@ -31,8 +31,6 @@ class PlateController extends AbstractController
         $serializer = new Serializer([$objectNormalizer], [$jsonEncoder]);
         $context = ["groups" => ["plate"]];
         $plates = $serializer->serialize($plates, "json", $context);
-
-        dd($plates);
         
         return new Response($plates);
     }

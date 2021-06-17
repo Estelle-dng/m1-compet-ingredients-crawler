@@ -34,8 +34,6 @@ class IngredientController extends AbstractController
         $context = ["groups" => ["ingredient"]];
         $ingredients = $serializer->serialize($ingredients, "json", $context);
 
-        dd($ingredients);
-        
         return new Response($ingredients);
     }
 
