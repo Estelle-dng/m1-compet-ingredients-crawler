@@ -28,6 +28,19 @@ class CrawlingCommand extends Command
         "Poisson blanc",
         "Saumon",
         "Truite",
+        "Saucisse fumée",
+        "Maquereau",
+        "Veau",
+        "Cabillaud",
+        "Escalope de veau",
+        "Prosciutto",
+        "Crevettes",
+        "Perche du Nil",
+        "Lieu jaune",
+        "Dinde",
+        "Filet de canette",
+        "Pavé de poisson blanc selon arrivage",
+        "Prosciutto crudo",
     ];
 
     public function __construct(EntityManagerInterface $em)
