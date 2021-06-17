@@ -29,6 +29,11 @@ class Ingredient
      */
     private $Plate;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
     public function __construct()
     {
         $this->Plate = new ArrayCollection();
@@ -71,6 +76,18 @@ class Ingredient
     public function removePlate(Plate $plate): self
     {
         $this->Plate->removeElement($plate);
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
