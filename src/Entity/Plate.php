@@ -6,6 +6,7 @@ use App\Repository\PlateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PlateRepository::class)
@@ -13,6 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Plate
 {
     /**
+     * @Groups({"plate"})
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
@@ -20,11 +22,13 @@ class Plate
     private $id;
 
     /**
+     * @Groups({"plate"})
      * @ORM\Column(type="string", length=255)
      */
     private $name;
 
     /**
+     * * @Groups({"plate"})
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $ImgUrl;
