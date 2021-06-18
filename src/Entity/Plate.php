@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\PlateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\MaxDepth;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,20 +18,24 @@ class Plate
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("plate")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("plate")
      */
     private $name;
 
     /**
+     * @Groups("plate")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $ImgUrl;
 
     /**
+     * @Groups("plate_ing")
      * @ORM\ManyToMany(targetEntity=Ingredient::class, mappedBy="Plate")
      */
     private $ingredients;

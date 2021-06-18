@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Ingredient;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Node\Expr\Cast\Array_;
 
 /**
  * @method Ingredient|null find($id, $lockMode = null, $lockVersion = null)
@@ -46,6 +47,24 @@ class IngredientRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+    }
+
+    public function findOnlyMain(): Array
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.type = :val')
+            ->setParameter('val', "Principaux")
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function getAllIngWithPlates() : Array
+    {
+        return $this->createQueryBuilder('i')
+            ->join('i.Plate', 'Plate')
+            ->getQuery()
+            ->getResult();
     }
     
 }

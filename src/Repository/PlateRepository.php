@@ -36,15 +36,15 @@ class PlateRepository extends ServiceEntityRepository
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?Plate
+    
+    public function getPlateByIndredients($value): Array
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
+            ->join('p.ingredients', 'ingredient')
+            ->andWhere('ingredient.id = :val')
             ->setParameter('val', $value)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
 }

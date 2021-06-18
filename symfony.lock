@@ -254,6 +254,12 @@
     "symfony/process": {
         "version": "5.4.x-dev"
     },
+    "symfony/property-access": {
+        "version": "5.4.x-dev"
+    },
+    "symfony/property-info": {
+        "version": "5.4.x-dev"
+    },
     "symfony/proxy-manager-bridge": {
         "version": "5.4.x-dev"
     },
@@ -271,6 +277,9 @@
         ]
     },
     "symfony/runtime": {
+        "version": "5.4.x-dev"
+    },
+    "symfony/serializer": {
         "version": "5.4.x-dev"
     },
     "symfony/service-contracts": {
