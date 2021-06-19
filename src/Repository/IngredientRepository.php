@@ -49,11 +49,11 @@ class IngredientRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findOnlyMain(): Array
+    public function findOnlyMain($type): Array
     {
         return $this->createQueryBuilder('i')
             ->andWhere('i.type = :val')
-            ->setParameter('val', "Principaux")
+            ->setParameter('val', $type)
             ->getQuery()
             ->getResult()
         ;

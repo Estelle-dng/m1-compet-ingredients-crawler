@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Ingredient;
 use App\Entity\Plate;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
@@ -30,11 +31,12 @@ class IngredientController extends AbstractController
     }
 
     /**
-     * @Route("/ingredient/{id}/plate", name="ingredientplate")
+     * @Route("/ingredient/plate", name="ingredientplate")
      */
-    public function getPlateByIngredients($id, SerializerInterface $serializer) : Response {
+    public function getPlateByIngredients(SerializerInterface $serializer, Request $request) : Response {
         $em = $this->getDoctrine()->getRepository(Plate::class);
-        $plateById = $em->getPlateByIndredients($id);
+        $get_values = $request->query->all();
+        $plateById = $em->getPlateByIndredients($get_values);
         $allJson = $serializer->serialize($plateById, 'json', ['groups' => ['plate', 'circular_reference_handler'] ]);
         return new Response($allJson);
     }
@@ -44,8 +46,18 @@ class IngredientController extends AbstractController
      */
     public function getMainIngredient(SerializerInterface $serializer) : Response {
         $em = $this->getDoctrine()->getRepository(Ingredient::class);
-        $plateById = $em->findOnlyMain();
-        $allJson = $serializer->serialize($plateById, 'json', ['groups' => ['ing', 'circular_reference_handler'] ]);
+        $ingGetter = $em->findOnlyMain("Principaux");
+        $allJson = $serializer->serialize($ingGetter, 'json', ['groups' => ['ing', 'circular_reference_handler'] ]);
+        return new Response($allJson);
+    }
+
+    /**
+     * @Route("/ingredient/cond", name="ingredientcond")
+     */
+    public function getCondIngredient(SerializerInterface $serializer) : Response {
+        $em = $this->getDoctrine()->getRepository(Ingredient::class);
+        $ingGetter = $em->findOnlyMain("Condiments");
+        $allJson = $serializer->serialize($ingGetter, 'json', ['groups' => ['ing', 'circular_reference_handler'] ]);
         return new Response($allJson);
     }
 }

@@ -39,12 +39,15 @@ class PlateRepository extends ServiceEntityRepository
     
     public function getPlateByIndredients($value): Array
     {
-        return $this->createQueryBuilder('p')
-            ->join('p.ingredients', 'ingredient')
-            ->andWhere('ingredient.id = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getResult()
+
+        $query =  $this->createQueryBuilder('p')
+            ->join('p.ingredients', 'ingredient');
+        foreach($value as $id) {
+            $query->andWhere('ingredient.id = :val')
+            ->setParameter('val', $id);
+        }
+        return $query->getQuery()
+                    ->getResult()
         ;
     }
 }
